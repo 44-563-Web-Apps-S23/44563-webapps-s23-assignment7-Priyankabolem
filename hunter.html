@@ -115,301 +115,68 @@
 
         </div>
     </div>
-
     <script>
-        let id = 'id';
-        let checkCount = 0;
-        let penalty = 0;
-        let lastCheck = 0;
-        let mouseLocation = 13;
-        let catLocation = 21;
-        let gameOver = false;
-        let ids = [];
-        for (let i = 0; i <= 23; i++) {
-            ids[i] = id + i;
+        var ids = [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124];
+        var checkCount = 0;
+        var penalty = 0;
+        var lastCheck = 0;
+        var mouseLocation = 13;
+        var catLocation = 21;
+        var gameOver = false;
+        function check(x) {
+            console.log('in fun' + x);
+            console.log('ids[x] fun' + ids[x]);
+            var imageid = ids[x];
+            console.log('gameOver', gameOver);
+            if (!gameOver) {
 
-            // console.log(ids[i]);
-        }
-        function check(position) {
-            if (gameOver == true) {
-
-            }
-            else {
-                if (position == 13) {
-                    id = ids[position]
-                    document.getElementById(id).src = "mouse.jpg";
-                    gameOver = true;
-                    penalty = penalty - 3;
-                    console.log("image is mouse " + position);
-                    console.log("penalty is " + penalty);
-                    console.log("GameOver");
-                }
-                else if (position == 21) {
-                    id = ids[position]
-                    document.getElementById(id).src = "bigcat.jpg";
+                var imgval = document.getElementById(imageid);
+                if (x == 21) {
+                    document.getElementById(imageid).src = "Lion.jpg";
                     gameOver = true;
                     penalty = penalty + 4;
-                    console.log("image is cat " + position);
-                    console.log("penalty is " + penalty);
-                    console.log("GameOver");
                 }
-                else {
-                    id = ids[position]
-                    document.getElementById(id).src = "grass.jpg";
-                    checkCount += 1;
-                    penalty += 1;
-                    console.log("checkcount is " + checkCount);
-                    console.log("penalty is " + penalty);
-                }
-                lastCheck = position;
-                console.log("lastCheck position is " + lastCheck);
+                else if (x == 13) {
+                    document.getElementById(imageid).src = "mouse.jpg";
+                    gameOver = true;
+                    penalty = penalty - 3;
 
+                } else {
+                    document.getElementById(imageid).src = "grass.jpg";
+                }
+                checkCount = checkCount + 1;
+                penalty = penalty + 1;
+                document.getElementById("bushes").innerHTML = 'Number of bushes checked is ' + checkCount;
+
+                lastCheck = x;
+                document.getElementById("penalty").innerHTML = 'Penalty is ' + penalty;
             }
-
-            bushes.innerHTML = "Number of bushes checked is " + checkCount;
-            penalty.innerHTML = "Penalty is " + penalty;
-
 
         }
-        let row = 0;
-        let row1 = 0;
-        let row2 = 0
-        let col1 = 0;
-        let col = 0;
-        let col2 = 0;
-
         function help() {
-            console.log(lastCheck);
-            col = 13 % 6;
-            col = col + 1;
-            row = Math.round(13 / 4);
-            console.log("cat-------****");
-            console.log("col is " + col);
-            console.log("row is " + row);
-            row1 = Math.round(lastCheck / 4);
-            console.log("row1 before " + row1);
-            col1 = lastCheck % 6;
-            console.log("col1 before " + col1);
-            if (row1 == 0) {
-                row1 = row1 + 1;
-                col1 = col1 + 1;
-            }
-            else if (row1 == 5) {
-                row1 = row1 - 1;
-            }
-            else if (row1 == 6) {
-                row1 = row1 - 2;
-            }
-            else {
-                if (row1 == 4 && col1 == 0) { col1 = col1 + 1; }
-                else if (row1 == 3 && col1 == 0) { col1 = col1 + 1 }
-                else {
-
-                }
-            }
-            if (col1 == 5) {
-                col1 = col1 + 1;
-            }
-            else if (col1 == 4) {
-                col1 = col1 + 1;
-            }
-            else if (col1 == 0) {
-                col1 = col1 + 1;
-            }
-            else if (row1 == 4 && col1 == 3) {
-                row1 = row1 - 1;
-                col1 = col1 + 1;
-            }
-            else if (row1 == 2 && col1 == 3) {
-                //row1=row1-1;
-                col1 = col1 + 1;
-            }
-            console.log("col1 is" + col1);
-            console.log("row1 is" + row1);
-            // console.log("CAT first "+ (row1+1==row && col1+1==col));
-            // console.log("CAT last "+(row1-1==row && col1-1==col));
-            // console.log("CAT Whole "+ (row1+1==row && col1+1==col)||(row1-1==row && col1-1==col));
-            col2 = 21 % 6;
-            row2 = Math.round(21 / 4);
-
-            row2 = row2 - 1;
-            col2 = col2 + 1;
-            console.log("col2 is " + col2);
-            console.log("row2 is " + row2);
-            console.log("row1 is " + row1);
-            console.log("col1 is " + col1);
-            // console.log("MOUSE first "+( row1+1==row2 && col1+1==col2));
-            // console.log("MOUSE last "+(row1-1==row2 && col1-1==col2));
-            // console.log("MOUSE Whole "+ (row1+1==row2 && col1+1==col2)||(row1-1==row2 && col1-1==col2));
-            if ((row == row1)) {
-                console.log("entered first row compare");
-                if (col > col1) {
-                    if (col1 + 1 == col) {
-                        penalty = penalty + 2;
-                        document.getElementById("help").innerHTML = "squeek";
-                        //help.innerHTML="Meow"; 
-                    }
-                    else {
-                        console.log("else in first compare");
-                        document.getElementById("help").innerHTML = "sorry, no help available";
-                        //help.innerHTML="sorry, no help available"; 
-                    }
-
-                }
-                else {
-                    console.log("entered the else part");
-                    if (col1 - 1 == col) {
-                        penalty = penalty + 2;
-                        document.getElementById("help").innerHTML = "squeek";
-                        //help.innerHTML="Meow";  
-                    }
-                    else if (col1 == col2) {
-                        penalty = penalty + 2;
-                        document.getElementById("help").innerHTML = "Meow";
-
-                    }
-                    else {
-                        console.log("else");
-                        document.getElementById("help").innerHTML = "sorry, no help available";
-                        //help.innerHTML="sorry, no help available"; 
-                    }
-                }
-            }
-            else if ((col == col1)) {
-                if (row > row1) {
-                    if (row1 + 1 == row) {
-                        penalty = penalty + 2;
-                        document.getElementById("help").innerHTML = "squeek";
-                        //help.innerHTML="Meow"; 
-                    }
-                    else {
-                        console.log("else");
-                        document.getElementById("help").innerHTML = "sorry, no help available";
-                        //help.innerHTML="sorry, no help available"; 
-                    }
-
-                }
-                else {
-                    if (row1 - 1 == row) {
-                        penalty = penalty + 2;
-                        document.getElementById("help").innerHTML = "squeek";
-                        //help.innerHTML="Meow";  
-                    }
-                    else {
-                        console.log("else");
-                        document.getElementById("help").innerHTML = "sorry, no help available";
-                        //help.innerHTML="sorry, no help available"; 
-                    }
-                }
-            }
-            else if (row1 - 1 == row || row1 + 1 == row) {
-                console.log("Enetered diff check 1");
-                if ((col1 + 1 == col || col1 - 1 == col) && (col1 <= 3)) {
-                    console.log("Entered into it");
-                    penalty = penalty + 2;
-                    document.getElementById("help").innerHTML = "squeek";
-                }
-                else if ((col1 + 1 == col2 || col1 - 1 == col2) && (col1 > 3)) {
-                    penalty = penalty + 2;
-                    document.getElementById("help").innerHTML = "Meow";
-                }
-                else {
-                    console.log("else");
-                    document.getElementById("help").innerHTML = "sorry, no help available";
-                    //help.innerHTML="sorry, no help available"; 
-                }
-            }
-            else if ((row2 == row1)) {
-                if (col2 > col1) {
-                    if (col1 + 1 == col2) {
-                        penalty = penalty + 2;
-                        document.getElementById("help").innerHTML = "Meow";
-                        //help.innerHTML="squeek"; 
-                    }
-                    else {
-                        console.log("else");
-                        document.getElementById("help").innerHTML = "sorry, no help available";
-                        //help.innerHTML="sorry, no help available"; 
-                    }
-
-                }
-                else {
-                    if (col1 - 1 == col2) {
-                        penalty = penalty + 2;
-                        document.getElementById("help").innerHTML = "Meow";
-                        //help.innerHTML="squeek";  
-                    }
-                    else {
-                        console.log("else");
-                        document.getElementById("help").innerHTML = "sorry, no help available";
-                        //help.innerHTML="sorry, no help available"; 
-                    }
-
-                }
-            }
-            else if ((col2 == col1)) {
-                if (row2 > row1) {
-                    if (row1 + 1 == row2) {
-                        penalty = penalty + 2;
-                        document.getElementById("help").innerHTML = "Meow";
-                        //help.innerHTML="squeek"; 
-                    }
-                    else {
-                        console.log("else");
-                        document.getElementById("help").innerHTML = "sorry, no help available";
-                        //help.innerHTML="sorry, no help available"; 
-                    }
-
-                }
-                else {
-                    if (row1 - 1 == row2) {
-                        penalty = penalty + 2;
-                        document.getElementById("help").innerHTML = "Meow";
-                        // help.innerHTML="squeek";  
-                    }
-                    else {
-                        console.log("else");
-                        document.getElementById("help").innerHTML = "sorry, no help available";
-                        //help.innerHTML="sorry, no help available"; 
-                    }
-                }
-            }
-            else if (row1 - 1 == row2 || row1 + 1 == row2) {
-                if ((col1 + 1 == col2 || col1 - 1 == col2) && (col1 > 3)) {
-                    penalty = penalty + 2;
-                    document.getElementById("help").innerHTML = "Meow";
-                }
-            }
-            else {
-                console.log("else");
-                document.getElementById("help").innerHTML = "sorry, no help available";
-                //help.innerHTML="sorry, no help available"; 
-            }
+            var mouseRowval = parseInt(mouseLocation / 6);
+            var mouseColval = mouseLocation % 6;
+            var columnval = lastCheck % 6;
+            var catRowval = parseInt(catLocation / 6);
+            var catColval = catLocation % 6;
+            var rowval = parseInt(lastCheck / 6);
 
 
 
-
-            /*
-                      if((row1+1==row && col1+1==col)||(row1-1==row && col1-1==col)){
-                         console.log("penalty --"+penalty);
-                         penalty=penalty+2;
-                         help.innerHTML="Meow";
-                      }
-                      else if((row1+1==row2 && col1+1==col2)||(row1-1==row2 && col1-1==col2)){
-                          console.log("rat-------****");
-                         help.innerHTML="squeek";
-                         console.log("penalty --"+penalty);
-                         penalty=penalty+2;
-                      }       
-                      else{
-                          console.log("else");
-                          help.innerHTML="sorry, no help available"; 
-                      }*/
-            penalty.innerHTML = "Penalty is " + penalty;
-            //document.getElementById("help").innerHTML="sorry";
+            if ((Math.abs(catRowval - rowval) <= 1) && (Math.abs(catColval - columnval) <= 1)) {
+                document.getElementById("help").innerHTML = "Help report: meow";
+            } else if ((Math.abs(mouseRowval - rowval) <= 1) && (Math.abs(mouseColval - columnval) <= 1)) {
+                document.getElementById("help").innerHTML = "Help report: squeek";
+            } else {
+                document.getElementById("help").innerHTML = "Help report: sorry, no help available";
+            }
+            penalty += 2;
+            document.getElementById("penalty").innerHTML = "Penalty is " + penalty;
         }
 
     </script>
+
+
 </body>
 
 </html>
