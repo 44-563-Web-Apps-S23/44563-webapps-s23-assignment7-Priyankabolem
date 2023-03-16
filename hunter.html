@@ -171,38 +171,47 @@
         var mouseLocation = 13
         var catLocation = 21
         var gameOver = false
-        function check(position) {
-            var imId = ids[position]
-            console.log(position);
-            checkCount += 1;
-            penalty += 1;
-            if (position == mouseLocation) {
-                console.log("hello");
-                document.getElementById(imId).src = "mouse.jpg"
-                gameOver = true
-                penalty -= 3
-                document.getElementById("penalty").innerHTML = "Penalty is " + penalty
-            } else if (position == catLocation) {
-                document.getElementById(imId).src = "bigcat.jpg"
-                gameOver = true
-                penalty += 4
-                document.getElementById("penalty").innerHTML = "Penalty is " + penalty
-            } else {
-                document.getElementById(imId).src = "grass.jpg"
-                document.getElementById("penalty").innerHTML = "Penalty is " + penalty
+
+        function check(status) {
+            console.log('in fun' + status);
+            console.log('ids[status] fun' + ids[status]);
+            var imageid = ids[status];
+            console.log('gameOver', gameOver);
+            if (!gameOver) {
+
+                var imgval = document.getElementById(imageid);
+                if (status == 21) {
+                    document.getElementById(imageid).src = "bigcat.jpg";
+                    gameOver = true;
+                    penalty = penalty + 4;
+                }
+                else if (status == 13) {
+                    document.getElementById(imageid).src = "mouse.jpg";
+                    gameOver = true;
+                    penalty = penalty - 3;
+
+                } else {
+                    document.getElementById(imageid).src = "grass.jpg";
+                }
+                checkCount = checkCount + 1;
+                penalty = penalty + 1;
+                document.getElementById("bushes").innerHTML = 'Number of bushes checked is ' + checkCount;
+
+                lastCheck = status;
+                document.getElementById("penalty").innerHTML = 'Penalty is ' + penalty;
             }
-            lastCheck = position
         }
+
         function help() {
-            let row = Math.floor(lastCheck / 4) - 1
+            let ps = Math.floor(lastCheck / 4) - 1
             let column = lastCheck % 6
             let catRow = Math.floor(catLocation / 4) - 1
             let catCol = catLocation % 6
             let mouseRow = Math.floor(mouseLocation / 4) - 1
             let mouseCol = mouseLocation % 6
-            let catRow_org = Math.abs(catRow - row);
+            let catRow_org = Math.abs(catRow - ps);
             let catCol_org = Math.abs(catCol - column);
-            let mouseRow_org = Math.abs(mouseRow - row);
+            let mouseRow_org = Math.abs(mouseRow - ps);
             let mouseCol_org = Math.abs(mouseCol - column);
 
             if (catRow_org <= 1 && catCol_org <= 1) {
