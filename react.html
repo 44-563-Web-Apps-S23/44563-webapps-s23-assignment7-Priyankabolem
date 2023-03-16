@@ -15,50 +15,46 @@
 <body>
     <h2>Speed Check by Priyanka Bolem</h2>
 
-    <div id="target"> Your time </div>
+    <div id="target">Your time </div>
+    <div id="counter">Count </div>
+
     <button type="button" class="btn btn-primary" onclick="startTime()">
         Start Timer</button>
-    <div id="counter"> Count </div>
+
     <button type="button" class="btn btn-primary" onclick="recordTime()">
         React</button>
+
+
     <script>
-        let reactTime
+        let reactTime = undefined;
+
+        function randCount() {
+            let n = Math.floor(Math.random() * 9) + 2;
+            return n;
+        }
+
         function recordTime() {
-            reactTime = undefined;
-
             reactTime = Date.now();
-            console.log(reactTime);
+            console.log("React button pressed time: " + reactTime)
         }
-        let p = 0;
-        let pr = Math.floor((Math.random() * 10) + 2);
         function startTime() {
-            pr = Math.floor((Math.random() * 10) + 2);
-            for (p = 0; p < pr; p++) {
-                console.log(pr);
-                setTimeou(p);
+            let startCount = randCount()
+            for (let p = 0; p < startCount; p++) {
+                setTimeout(function () {
+                    console.log("Values after " + p)
+                    document.getElementById("counter").innerHTML = "Count " + p;
+                }, (startCount - p) * 1000)
             }
-            setTimeout(() => {
-                console.log("Entered anononymouse fn");
+            setTimeout(function () {
                 if (reactTime == undefined) {
-                    console.log("entered if");
-                    document.getElementById('target').innerHTML = "Too Slow";
+                    document.getElementById("target").innerHTML = "Too slow"
+                } else {
+                    let endTime = Date.now();
+                    let difference = endTime - reactTime;
+                    document.getElementById("target").innerHTML = "Time was " + difference
                 }
-                else {
-                    console.log("entered else");
-                    let endTime;
-                    endTime = Date.now();
-                    console.log("endtime is" + endTime);
-                    let temp = endTime - reactTime;
-                    console.log(temp);
-                    document.getElementById('target').innerHTML = "Time was " + temp;
-                }
-            }, 8 * 1000);
 
-        }
-        function setTimeou(p) {
-            setTimeout(() => {
-                document.getElementById('countdown').innerHTML = p;
-            }, (pr - p) * 1000);
+            }, 8000)
         }
     </script>
 </body>
