@@ -58,14 +58,12 @@
     <input class="btn" type="button" value="Promote" onclick="promote()">
     <script>
         function makeNewDiv() {
-            /* make the div and its text */
             let element = document.createElement("div")
             let newElement = document.getElementById("input").value
             element.innerHTML = newElement
             element.className = "delayQ"
             element.style.color = "orange"
 
-            /* add it to the container */
             let container = document.getElementById('target')
             container.appendChild(element)
 
