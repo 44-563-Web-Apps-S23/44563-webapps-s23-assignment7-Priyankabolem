@@ -171,7 +171,6 @@
         var mouseLocation = 13
         var catLocation = 21
         var gameOver = false
-
         function check(position) {
             var imId = ids[position]
             console.log(position);
@@ -184,7 +183,7 @@
                 penalty -= 3
                 document.getElementById("penalty").innerHTML = "Penalty is " + penalty
             } else if (position == catLocation) {
-                document.getElementById(imId).src = "tiger.jpg"
+                document.getElementById(imId).src = "bigcat.jpg"
                 gameOver = true
                 penalty += 4
                 document.getElementById("penalty").innerHTML = "Penalty is " + penalty
